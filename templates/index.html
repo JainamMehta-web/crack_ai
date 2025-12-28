@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concrete Defect Detection</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f7;
+            text-align: center;
+        }
+
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 22px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+         .image-box {
+            margin-top: 20px;
+            width: 95%;
+            height: 260px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafafa;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eef2f5;
+            border-radius: 6px;
+        }
+
+        .result-box h3 {
+            margin: 0;
+            color: #222;
+        }
+
+        .confidence {
+            margin-top: 8px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Concrete Defect Detection</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if filename %}
+        <div class="image-box">
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}">
+        </div>
+    {% endif %}
+
+    {% if result %}
+        <div class="result-box">
+            <h3>Detected Defect: {{ result }}</h3>
+
+            {% if confidence is not none %}
+                <p class="confidence">
+                    Confidence: {{ confidence | round(2) }}%
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

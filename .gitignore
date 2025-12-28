@@ -1,0 +1,9 @@
+build/
+dist/
+*.pkg
+*.zip
+__pycache__/
+.venv/
+.idea/
+build/
+build/
